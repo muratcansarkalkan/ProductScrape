@@ -22,7 +22,7 @@ for i in range(1,4):
 headers = {'User-Agent': user_agent}
 
 origin = "https://www.amazon.com.tr"
-outfile = open('results.json', 'w', encoding='utf8')
+outfile = open('resultsamazon.json', 'w', encoding='utf8')
 
 class AmazonTR():
     def __init__(self, query):
@@ -60,9 +60,9 @@ class AmazonTR():
 
                 product = utilities.ProductCard(asin,title,price,i)
                 # amazonlist.append(product)
-                print(f"Parsing successful for product {r}.")
                 jsonAmazonTRStr = json.dumps(product.__dict__, indent=1, ensure_ascii=False)
                 outfile.write(jsonAmazonTRStr)
+                print(f"Parsing successful for product {r}.")
                 time.sleep(1)
             except:
                 print("Sorry, product could not be parsed")
@@ -177,3 +177,7 @@ class AmazonTR():
         
         twrv.join()
         return amazonlist
+
+# searchtrendyol = AmazonTR("kitap")
+# trendy = searchtrendyol.link()
+# AmazonTR.parser(trendy, 6)

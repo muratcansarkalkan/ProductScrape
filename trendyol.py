@@ -7,7 +7,7 @@ import time
 import random
 import json
 
-outfile = open('results.json', 'w', encoding='utf8')
+outfile = open('resultstrendyol.json', 'w', encoding='utf8')
 
 # Randomly switches User Agents to minimize 503 Errors.
 user_agent_list = [
