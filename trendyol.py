@@ -69,12 +69,16 @@ class Trendyol():
                 id = (id3.text).split()[-1]
 
                 product = utilities.ProductCard(id, title, price, productlink)
-                # trendyollist.append(product)
                 print(f"Parsing successful for product {r}.")
-
-                jsonTrendyolStr = json.dumps(product.__dict__, indent=1, ensure_ascii=False)
-                outfile.write(jsonTrendyolStr)
+                
+                if len(trendyollist) < limit:
+                    jsonTrendyolStr = json.dumps(product.__dict__, indent=1, ensure_ascii=False)
+                    outfile.write(jsonTrendyolStr)
+                    trendyollist.append(product)
+                else:
+                    print("Max limit")
                 time.sleep(1)
+                    
             except:
                 print("Sorry, product could not be parsed")
         # Defines page and product cards. Results per page was 24
@@ -86,16 +90,16 @@ class Trendyol():
                 url = f"{url0}&pi={i}"
                 cardsingle = cardsingle(url)
                 # Strips the number of output using remainder func
-                cardsingle = cardsingle[0:limit % 24]
-                card = card+cardsingle
+                cardtup = cardsingle[0:limit % 24]
+                card = card+cardtup
             elif i == 1:
                 url = f"{url0}"
-                cardsingle = cardsingle(url)
-                card = card+cardsingle
+                cardtup = cardsingle(url)
+                card = card+cardtup
             else:
                 url = f"{url0}&pi={i}"
-                cardsingle = cardsingle(url)
-                card = card+cardsingle
+                cardtup = cardsingle(url)
+                card = card+cardtup
 
         for c in card:
             try:
@@ -110,4 +114,4 @@ class Trendyol():
 
 # searchtrendyol = Trendyol("kitap")
 # trendy = searchtrendyol.link()
-# Trendyol.parser(trendy, 6)
+# Trendyol.parser(trendy, 96)
